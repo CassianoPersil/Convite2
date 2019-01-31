@@ -328,7 +328,7 @@
             <div class="container-fluid">
                 <div class="slider-text d-md-flex align-items-center" data-scrollax-parent="true">
 
-                    <div class="one-forth pr-md-4 ftco-animate align-self-md-center" data-scrollax=" properties: { translateY: '70%' }">
+                    <div class="one-forth pr-md-4 ftco-animate align-self-md-center" data-scrollax=" properties: { translateY: '70%' }" data-toggle="modal" data-target="#modalConfirmacao">
                         <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Não esqueça!!!</h1>
                         <p class="mb-md-5 mb-sm-3" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Estamos convidando você a conhecer nosso filho ainda que na barriga da mamãe! Ele vai ficar muito feliz! Então, não esqueça do presente!</p>
                         <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="#" class="btn btn-primary px-4 py-3">Confirmar Presença</a></p>
@@ -372,7 +372,7 @@
                                 var local = {lat: -7.237441, lng: -39.334666};
                                 // The map, centered at Uluru
                                 var map = new google.maps.Map(
-                                        document.getElementById('map'), {zoom: 4, center: local});
+                                        document.getElementById('map'), {zoom: 17, center: local});
                                 // The marker, positioned at Uluru
                                 var marker = new google.maps.Marker({position: local, map: map});
                             }
@@ -383,7 +383,7 @@
                         * The callback parameter executes the initMap() function
                         -->
                         <script async defer
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwFfFPBxP9EIfUdkNhkhdPKW11UkmauCM&callback=initMap">
+                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADGXKxjhQg8TnJn44hRuN71eJLYz2WJVI&callback=initMap">
                             //AIzaSyB6P_H7jHmQMM1Ovi3KrsZTHokNPnLgeEk//
                         </script>
 
@@ -420,6 +420,59 @@
         </footer>
         <embed src="musica/02. Mulher Maravilha (Ao Vivo).mp3" width="1" Height="1" Autostart="True" Loop="True" volume="0">
 
+        <!-- Modal de confirmação de presença -->
+        
+        <!-- Modal 1 -->
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalConfirmacaoLabel">Confirme aqui sua presença!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <form>
+                  <div class="input-group mb-3">
+                    <p class="text-center">Olá! Obrigado por estar presente em um momento tão importante para nós.</p>
+                         <select class="custom-select" id="inputGroupSelect02">
+                            <option value="0" selected>Selecione sua família...</option>
+                        <?php
+                            require_once('backend/conexao.php');
+
+                            $consulta = $pdo->query("SELECT nome_familia FROM familia;");
+                            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<option>{$linha['nome_familia']} e família</option>";
+                            }
+                        ?>
+                    </select>
+                  </div>
+                  <div class="input-group mb-3">
+                      <select class="custom-select" id="inputGroupSelect01">
+                        <option selected value="0">Quantas pessoas irão com você?</option>
+                        <option value="1">Nenhuma</option>
+                        <option value="2">Uma</option>
+                        <option value="3">Duas</option>
+                        <option value="4">Três</option>
+                      </select>
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><span class="oi oi-phone"></span></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Confirme sua presença com o seu telefone..." aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success">Confirmar</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
 
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -439,8 +492,6 @@
         <script src="js/bootstrap-datepicker.js"></script>
         <script src="js/jquery.timepicker.min.js"></script>
         <script src="js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
 
     </body>
